@@ -1,1 +1,1 @@
-# Use  this fpr Neurene in Venture Campus
+# Use  this for Neurene in Venture Campus
