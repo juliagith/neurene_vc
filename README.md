@@ -1,3 +1,8 @@
-# Neurene in Venture Campus
+# Neurene for Venture Campus
 
-This repo contains the code for the webpage version of Neurene -  an application for companies to improve employees mental health and stress resistance through education and organized break management.
+Welcome to Neurene, your personal BrainBreak enabler!
+
+If you are ready for your next BrainBreak, click here: 
+
+home.html
+
