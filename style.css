@@ -69,7 +69,7 @@ body {
 /* Menu Button */
 .menu-button {
   position: absolute;
-  top: 20px;
+  top: 25px;
   right: 20px;
   background-color: transparent;
   border: 1px solid #333;
