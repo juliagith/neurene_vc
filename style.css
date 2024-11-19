@@ -55,21 +55,12 @@ body {
   margin-top: 20px;
 }
 
-.cloud {
-  float: left;
-  position: absolute;
-  width: 30px;
-}
 
 .cloud-left {
   top: 15px;
   left: 100px;
 }
 
-.cloud-right {
-  top: -15px;
-  right: -100px;
-}
 
 /* Menu Button */
 .menu-button {
