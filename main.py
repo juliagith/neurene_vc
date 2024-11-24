@@ -5,14 +5,26 @@ st.set_page_config(
     page_title="Neurene - Mindful Breaks",
     page_icon="🧘",
     layout="centered",
+    initial_sidebar_state="collapsed"
 )
 
 # Load the logo
 logo_path = "./static/neurene_logo.jpeg"
 
-
 # Design the landing page
 def main():
+    # Apply a custom background color
+    st.markdown(
+        """
+        <style>
+        body {
+            background-color: #1E1E1E; /* Dark background for contrast */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # Logo and title section
     st.image(logo_path, use_container_width=True)
     st.markdown(
@@ -53,23 +65,9 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # Call-to-action section
-    st.markdown(
-        """
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="#" style="
-                text-decoration: none;
-                background-color: #4CAF50;
-                color: white;
-                padding: 10px 20px;
-                border-radius: 5px;
-                font-size: 16px;
-                font-family: Arial, sans-serif;
-            ">Get Started</a>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    # Call-to-action section (Button to navigate to questions.py)
+    if st.button("Get Started"):
+        st.switch_page("pages/questions.py")
 
     # Footer
     st.markdown(
