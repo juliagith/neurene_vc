@@ -3,7 +3,7 @@ import streamlit as st
 # Set the page configuration
 st.set_page_config(
     page_title="Neurene - Mindful Breaks",
-    page_icon="🧘",
+    page_icon="🌻",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
@@ -18,7 +18,7 @@ def main():
         """
         <style>
         body {
-            background-color: #1E1E1E; /* Dark background for contrast */
+            background-color: #E1E1E1; /* Dark background for contrast */
         }
         </style>
         """,
@@ -30,18 +30,19 @@ def main():
     st.markdown(
         """
         <div style='text-align: center; margin-top: -20px;'>
-            <h1 style='font-family: Arial, sans-serif; color: #FFFFFF;'>Neurene</h1>
-            <h3 style='font-family: Arial, sans-serif; color: #FFFFFF;'>Mindful Breaks, Seamlessly Integrated</h3>
+            <h1 style='font-family: Arial, sans-serif; '>Neurene</h1>
+            <h3 style='font-family: Arial, sans-serif; '>Mindful Breaks, Seamlessly Integrated</h3>
         </div>
         """,
         unsafe_allow_html=True,
     )
+    
 
     # Subheading and app description
     st.markdown(
         """
         <div style="text-align: center; margin-top: 20px;">
-            <p style="font-size: 18px; color: #FFFFFF; font-family: Arial, sans-serif;">
+            <p style="font-size: 18px; font-family: Arial, sans-serif;">
                 Discover small moments of mindfulness amidst your busy schedule. 
                 Neurene scans your calendar to find short, rejuvenating breaks tailored to you.
             </p>
@@ -54,8 +55,8 @@ def main():
     st.markdown(
         """
         <div style='margin: 40px 0;'>
-            <h2 style='text-align: center; font-family: Arial, sans-serif; color: #FFFFFF;'>Why Choose Neurene?</h2>
-            <ul style='list-style-type: none; padding: 0; font-family: Arial, sans-serif; color: #FFFFFF;'>
+            <h2 style='text-align: center; font-family: Arial, sans-serif; '>Why Choose Neurene?</h2>
+            <ul style='list-style-type: none; padding: 0; font-family: Arial, sans-serif'>
                 <li style='margin: 10px 0;'><b>🌟 Smart Integration:</b> Sync seamlessly with your calendar.</li>
                 <li style='margin: 10px 0;'><b>🕰️ Bite-sized Breaks:</b> Short, effective sessions to recharge.</li>
                 <li style='margin: 10px 0;'><b>🎧 Personalized Guidance:</b> Tailored mindfulness suggestions.</li>
@@ -73,7 +74,7 @@ def main():
     st.markdown(
         """
         <div style="text-align: center; margin-top: 50px;">
-            <p style="font-size: 14px; color: #FFFFFF; font-family: Arial, sans-serif;">
+            <p style="font-size: 14px; font-family: Arial, sans-serif;">
                 © 2024 Neurene. All rights reserved.
             </p>
         </div>
