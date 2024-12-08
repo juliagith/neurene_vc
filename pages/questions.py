@@ -21,9 +21,9 @@ def main():
     # Here you can add the functionality or questions for the user.
     break_duration = st.selectbox("How long would you like to take your mental health breaks?",
                                   ("5 Minutes", "10 Minutes", "15 Minutes"),
-                                    placeholder="Select an option"
+                                    placeholder="Select an option",
+                                    index=None
                                     )
-    
 
     st.write("Your Answer was: ", break_duration)
 
@@ -31,8 +31,9 @@ def main():
     st.session_state['break_duration'] = break_duration
 
     productivity_time = st.selectbox("At which time of the day do you feel most productive?",
-                                     ("In the morning (7 am - 10 am)", "In the late morning (10 am - 1 pm)", "In the early afternoon (2 pm - 5 pm)", "In the late afternoon (6 pm - 8 pm)", "Other"), 
-                                     placeholder="Select an option"
+                                     ("7 - 10 AM", "10 AM - 1 PM", "1-4 PM", "4-7 PM", "Other"), 
+                                     placeholder="Select an option",
+                                     index=None
                                 )
     st.write("Your Answer was: ", productivity_time)
 
