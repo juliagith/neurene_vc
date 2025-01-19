@@ -8,8 +8,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+
 # Load the logo
-logo_path = "./static/neurene_logo.jpeg"
+logo_path = "./static/neurene_logo_light.jpg"
 
 # Design the landing page
 def main():
@@ -26,7 +27,7 @@ def main():
     )
 
     # Logo and title section
-    st.image(logo_path, use_container_width=True)
+    st.image(logo_path, use_container_width="auto")
     st.markdown(
         """
         <div style='text-align: center; margin-top: -20px;'>
@@ -68,19 +69,22 @@ def main():
 
     # Call-to-action section (Button to navigate to questions.py)
     if st.button("Get Started"):
-        st.switch_page("pages/questions.py")
+        st.switch_page("pages/onboarding.py")
 
     # Footer
     st.markdown(
-        """
-        <div style="text-align: center; margin-top: 50px;">
-            <p style="font-size: 14px; font-family: Arial, sans-serif;">
-                © 2024 Neurene. All rights reserved.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    """
+    <div style="text-align: center; margin-top: 50px;">
+        <p style="font-size: 14px; font-family: Arial, sans-serif;">
+            © 2024 Neurene Productivity Group GmbH. All rights reserved.
+        </p>
+        <p style="font-size: 14px; font-family: Arial, sans-serif;">
+            For support, visit our <a href="/faq" target="_self">FAQ Page</a> or contact us at <a href="mailto:support@neurene.com">support@neurene.com</a>
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 
 if __name__ == "__main__":

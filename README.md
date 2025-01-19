@@ -15,7 +15,7 @@ conda create -n neurene python=3.12.4
 2. Activate your environment
 ```bash
 conda activate neurene
-```
+``` r
 
 3. Install the necessary packages
 ```bash
@@ -26,3 +26,9 @@ pip install -r requirements.txt
 ```bash
 streamlit run main.py
 ```
+
+# Further planned developments
+
+connect gmail API
+
+explore and discuss what can be done with AI, whoop api, headspace api, insights api
