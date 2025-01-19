@@ -27,6 +27,30 @@ pip install -r requirements.txt
 streamlit run main.py
 ```
 
+# Develop on GitHub Codespaces
+1. Create Python Virtual-Environment
+```bash
+python3 -m venv ./venv
+```
+
+2. Activate Python Venv
+
+```bash
+source venv/bin/activate
+```
+
+3. Install Python Packages
+
+``bash
+pip install -r requirements.txt
+```
+
+4. Start Streamlit App
+
+``bash
+streamlit run main.py
+```
+
 # Further planned developments
 
 connect gmail API
