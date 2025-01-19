@@ -2,7 +2,7 @@ import streamlit as st
 
 # Set the page configuration
 st.set_page_config(
-    page_title="Neurene - Questions",
+    page_title="Neurene - Onboarding",
     page_icon="🫀",
     layout="centered",
     initial_sidebar_state="collapsed"
@@ -12,7 +12,7 @@ st.set_page_config(
 def main():
     st.markdown(
         """
-        <h1 style='text-align: center; font-family: Arial, sans-serif;'>Welcome to the Questions Page</h1>
+        <h1 style='text-align: center; font-family: Arial, sans-serif;'>Welcome to the Initialization of Neurene</h1>
         <p style='text-align: center; font-family: Arial, sans-serif;'>This is where you can personalize your mental-health experience.</p>
         """,
         unsafe_allow_html=True,
@@ -39,7 +39,12 @@ def main():
 
     st.session_state['productivity_time'] = productivity_time
 
-    
+    # Here you can add the functionality or questions for the user.
+    preferred_calendar = st.selectbox("Which calendar suite do you want to connect with?",
+                                  ("Google", "Microsoft", "others"),
+                                    placeholder="Select an option",
+                                    index=None
+                                    )
 
     if st.button("Generate your BrainBreak Schedule"):
         st.switch_page("pages/results.py")
@@ -49,7 +54,7 @@ def main():
         """
         <div style="text-align: center; margin-top: 50px;">
             <p style="font-size: 14px; font-family: Arial, sans-serif;">
-                © 2024 Neurene. All rights reserved.
+                © 2024 Neurene Productivity Group GmbH. All rights reserved.
             </p>
         </div>
         """,

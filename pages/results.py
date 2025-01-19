@@ -26,14 +26,14 @@ def main():
     )    
 
     st.write(f"Your ideal BrainBreak would last {st.session_state.break_duration}. And would be scheduled after {st.session_state.productivity_time}.")
-    st.write("Your meetings for today are shown below:")
+    st.write("Your upcoming meetings are shown below:")
 
     maxresults = 4
     events = get_calendar_events(maxresults)
     html_output = render_events_to_html(events)
     st.markdown(html_output, unsafe_allow_html=True)
     
-    st.write(f"Your ideal BrainBreak for today would be scheduled at 2.30 pm and would last {st.session_state.break_duration}.")
+    st.write(f"Considering you preferences and your meetings for tomorrow, your ideal BrainBreaks would be scheduled at 2.30 pm and would last {st.session_state.break_duration}.")
 
     if st.button("Add BrainBreak to your calendar"):
         now = datetime.datetime.utcnow()
@@ -44,12 +44,17 @@ def main():
         
         result = create_calendar_event(summary, start_time, end_time)
         st.write(result)
+        
+    if st.button("Start your BrainBreak"):
+            st.switch_page("pages/brainbreak.py")
+
+    
 
     st.markdown(
         """
         <div style="text-align: center; margin-top: 50px;">
             <p style="font-size: 14px; font-family: Arial, sans-serif;">
-                © 2024 Neurene. All rights reserved.
+                © 2024 Neurene Productivity Group GmbH. All rights reserved.
             </p>
         </div>
         """,
