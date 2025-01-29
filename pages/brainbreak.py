@@ -5,8 +5,20 @@ st.set_page_config(
     page_title="Neurene - Mindful Breaks",
     page_icon="🌻",
     layout="centered",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
 )
+
+# Initialize session state
+if "break_active" not in st.session_state:
+    st.session_state.break_active = False
+if "current_mood" not in st.session_state:
+    st.session_state.current_mood = None
+if "goal" not in st.session_state:
+    st.session_state.goal = None
+if "post_mood" not in st.session_state:
+    st.session_state.post_mood = None
+if "break_ended" not in st.session_state:
+    st.session_state.break_ended = False
 
 # Create the DataFrame
 data = {
@@ -60,103 +72,76 @@ data = {
 }
 
 df = pd.DataFrame(data)
-
-# Initialize session state
-if "break_active" not in st.session_state:
-    st.session_state.break_active = False
-
-if "current_mood" not in st.session_state:
-    st.session_state.current_mood = None
-
-if "goal" not in st.session_state:
-    st.session_state.goal = None
-
-# Workflow
-if not st.session_state.break_active:
-    st.title("Neurene - Mindful Breaks")
-
-    # Step 1: Ask for current mood
-    st.session_state.current_mood = st.selectbox(
-        "How do you currently feel?",
-        [
-            "Stressed 😵‍💫", 
-            "Anxious 😟", 
-            "Sad 😢", 
-            "Bored 😐", 
-            "Angry 😠", 
-            "Overwhelmed 😰", 
-            "Tired 😴", 
-            "Happy 😊", 
-            "Productive 💪", 
-            "Calm 😌", 
-            "No answer 🤷"
-        ],
-        placeholder="Select your current mood",
-        index=None
-    )
-
-    # Step 2: Ask for the goal of the break
-    st.session_state.goal = st.selectbox(
-        "What would you like to gain from your break?",
-        df["Goal"].unique(),
-        placeholder="Select what you'd like to achieve",
-        index=None
-    )
-
-    # Start Break button
-    if st.button("Start Your Break"):
-        st.session_state.break_active = True
+logo_path = "./static/neurene_logo_light.jpg"
 
 
-    # Show suggestions
-    if st.session_state.current_mood and st.session_state.goal and st.session_state.break_active:
-        st.write("Your device is now in **Do Not Disturb** mode. ⏾")
-        
-        st.subheader("Suggestions on how to spend your break based on your goal:")
+# Title and Introduction
+st.image(logo_path, width=80)
+st.title(f"Welcome, {st.session_state.username}!")
+st.subheader("We are so glad that you decided to take some time for yourself today.")
+
+# Step 1: Ask for Current Mood
+st.session_state.current_mood = st.selectbox(
+    "How do you currently feel?",
+    ["Stressed 😵‍💫", "Anxious 😟", "Sad 😢", "Bored 😐", "Angry 😠", "Overwhelmed 😰", "Tired 😴", "Happy 😊", "Productive 💪", "Calm 😌", "No answer 🤷"],
+    index=None,
+)
+
+# Step 2: Ask for the Goal of the Break
+st.session_state.goal = st.selectbox(
+    "What would you like to gain from your break?",
+    df["Goal"].unique(),
+    index=None,
+)
+
+# Start or Skip Break
+if st.button("Start Brain Break"):
+    st.session_state.break_active = True
+    st.session_state.break_ended = False
+elif st.button("Skip Brain Break"):
+    st.write("Skipping break. You can take one later!")
+
+# Brain Break Phase
+if st.session_state.break_active:
+    st.subheader("Recommended Activities for Your Break")
+    
+    if st.session_state.goal:
         goal_index = df["Goal"].tolist().index(st.session_state.goal)
-
         activities = df.loc[goal_index, "Activity/Method"]
         descriptions = df.loc[goal_index, "Description"]
-
+        
         for activity, description in zip(activities, descriptions):
             st.markdown(f"**Activity:** {activity}", unsafe_allow_html=True)
             st.write(description)
-
-
-    @st.dialog("How do you feel after your break?")
-    def vote(item):
-        st.write(f"Select your current mood")
-        reason = st.radio(
-                "Choose your feeling:",
-                ["😊 Happy", "😌 Calm", "😕 Neutral", "😞 Sad", "😡 Angry", "❌ No answer"],
-                index=None
-            )
-        st.write("You currently feel: ", reason)
-        if st.button("Submit"):
-            st.session_state.vote = {"item": item, "reason": reason}
-            st.rerun()
-
-    if "vote" not in st.session_state:
-        st.write("Are you done with your break?")
-        if st.button("Yes"):
-            vote("Yes")
-        if st.button("No"):
-            vote("No")
-    else:
-        f"You initally felt {st.session_state.current_mood}. Now, you feel {st.session_state.vote['reason']}"
     
+    st.warning("Your device is now in **Do Not Disturb** mode. ⏾")
+    
+    if st.button("End Break"):
+        st.session_state.break_active = False
+        st.session_state.break_ended = True
+
+# Post-Break Mood Assessment
+if st.session_state.break_ended:
+    st.subheader("How do you feel after your break?")
+    st.session_state.post_mood = st.radio(
+        "Select your mood:",
+        ["😊 Happy", "😌 Calm", "😕 Neutral", "😞 Sad", "😡 Angry", "❌ No answer"],
+        index=None,
+    )
+    
+    if st.session_state.post_mood and st.button("Save & View Analytics"):
+        st.success("Your mood has been saved. Redirecting to Analytics...")
+        st.switch_page("pages/analytics.py")
 
 # Footer
-st.markdown(
-    """
+st.markdown("""
     <div style="text-align: center; margin-top: 50px;">
         <p style="font-size: 14px; font-family: Arial, sans-serif;">
             © 2024 Neurene Productivity Group GmbH. All rights reserved.
         </p>
         <p style="font-size: 14px; font-family: Arial, sans-serif;">
-            For support, visit our <a href="/faq" target="_self">FAQ Page</a> or contact us at <a href="mailto:support@neurene.com">support@neurene.com</a>
+            For support, visit our <a href="/faq" target="_self">FAQ Page</a> or contact us at 
+            <a href="mailto:support@neurene.com">support@neurene.com</a>
         </p>
     </div>
-    """,
-    unsafe_allow_html=True,
-)
+""", unsafe_allow_html=True)

@@ -27,7 +27,7 @@ def main():
     )
     
     # FAQ Section
-    st.image(logo_path, width=70)
+    st.image(logo_path, width=80)
     st.markdown("### Frequently Asked Questions")
 
     # Question 1
@@ -54,7 +54,8 @@ def main():
         <div style="text-align: center; margin-top: 50px;">
             <p style="font-size: 14px; font-family: Arial, sans-serif;">
                 For further questions, please reach out to <a href="mailto:support@neurene.com">support@neurene.com</a>
-                
+            </p>
+            <p style="font-size: 14px; font-family: Arial, sans-serif;">
                 © 2024 Neurene Productivity Group GmbH. All rights reserved.
             </p>
         </div>
