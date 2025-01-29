@@ -5,7 +5,12 @@ st.set_page_config(
     page_title="Neurene - Onboarding",
     page_icon="🫀",
     layout="centered",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
+    menu_items={
+         'Get Help': "http://localhost:8501/faq",
+         'Report a bug': "mailto:support@neurene.com",
+         'About': "© 2024 Neurene Productivity Group GmbH. All rights reserved."
+     }
 )
 
 
