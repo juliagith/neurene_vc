@@ -16,28 +16,15 @@ st.set_page_config(
 # Sidebar with grouped pages
 st.sidebar.title("Navigation")
 
-# Group 1: General Information
-with st.sidebar.expander("📋 General Information"):
-    if st.button("Home"):
-        st.query_params(page="home")
-    if st.button("FAQ"):
-        st.switch_page("pages/faq.py")
-    if st.button("About"):
-        st.query_params(page="about")
-
-# Group 2: Pricing & Partners
-with st.sidebar.expander("💸 Pricing & Partners"):
-    if st.button("Pricing Model"):
-        st.query_params(page="pricing")
-    if st.button("Partners"):
-        st.query_params(page="partners")
 
 # Group 3: User Tools
 with st.sidebar.expander("🔒 User Tools"):
     if st.button("Login"):
         st.switch_page("pages/login.py")
     if st.button("Register"):
-        st.query_params(page="register")
+        st.query_params("home.py")
+    if st.button("FAQ"):
+        st.switch_page("pages/faq.py")
 
 # Handle page content based on sidebar selection
 # query_params = st.query_params()
@@ -293,9 +280,9 @@ def main():
                 <div class="container">
                     <h4>Our Happy Customers Include:</h4>
                     <ul>
-                        <li>XYZ Tech Solutions</li>
-                        <li>BlueSky Enterprises</li>
-                        <li>Harmony Health Group</li>
+                        <li>tbd</li>
+                        <li>...</li>
+                        <li>...</li>
                     </ul>
                 </div>
                 """,
@@ -303,11 +290,11 @@ def main():
             )
 
         # Login Section
-        with st.expander("🔒 User Login"):
+        with st.expander("🔒 Register Now"):
             st.markdown(
                 """
                 <div class="container">
-                    <h4>Login to Your Account</h4>
+                    <h4>Register now and start your journey with Neurene.</h4>
                 """,
                 unsafe_allow_html=True,
             )
@@ -316,12 +303,12 @@ def main():
             username = st.text_input("Username")
             password = st.text_input("Password", type="password")
 
-            if st.button("Login "):
+            if st.button("Register Now"):
                 if username == "" or password == "":
                     st.error("Please fill in all fields.")
                 else:
                     st.session_state.username = username
-                    st.switch_page("pages/brainbreak.py")
+                    st.switch_page("pages/onboarding.py")
                         
 
     # Footer

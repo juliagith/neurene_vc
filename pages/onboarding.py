@@ -7,12 +7,21 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed",
     menu_items={
-         'Get Help': "http://localhost:8501/faq",
-         'Report a bug': "mailto:support@neurene.com",
          'About': "© 2024 Neurene Productivity Group GmbH. All rights reserved."
      }
 )
 
+# Sidebar with grouped pages
+st.sidebar.title("Navigation")    
+
+with st.sidebar.expander("🔒 User Tools"):
+    if st.button("Logout"):
+        st.switch_page("home.py")
+    if st.button("FAQ"):
+        st.switch_page("pages/faq.py")
+
+if "schedule_activate" not in st.session_state:
+    st.session_state.schedule_activate = False
 
 def main():
     st.markdown(
@@ -46,13 +55,15 @@ def main():
 
     # Here you can add the functionality or questions for the user.
     preferred_calendar = st.selectbox("Which calendar suite do you want to connect with?",
-                                  ("Google", "Microsoft", "others"),
+                                  ("Google", "others"),
                                     placeholder="Select an option",
                                     index=None
                                     )
 
     if st.button("Generate your BrainBreak Schedule"):
         st.switch_page("pages/results.py")
+
+        
 
 # Footer
     st.markdown(

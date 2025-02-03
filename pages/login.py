@@ -13,6 +13,15 @@ st.set_page_config(
      }
 )
 
+# Sidebar with grouped pages
+st.sidebar.title("Navigation")
+
+# Group 1: General Information
+with st.sidebar.expander("📋 General Information"):
+    if st.button("Home"):
+        st.switch_page("home.py")
+    if st.button("FAQ"):
+        st.switch_page("pages/faq.py")
 
 # Load the logo
 logo_path = "./static/neurene_logo_light.jpg"

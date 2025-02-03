@@ -8,6 +8,24 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+st.sidebar.title("Navigation")
+
+# Group 1: General Information
+with st.sidebar.expander("📋 Products"):
+    if st.button("Getting Started"):
+        st.switch_page("pages/onboarding.py")
+    if st.button("Start a Brain Break"):
+        st.switch_page("pages/brainbreak.py")
+    if st.button("Analytics"):
+        st.query_params("pages/analytics.py")
+    
+
+with st.sidebar.expander("🔒 User Tools"):
+    if st.button("Login"):
+        st.switch_page("pages/login.py")
+    if st.button("Register"):
+        st.query_params("home.py")
+
 
 # Load the logo
 logo_path = "./static/neurene_logo_light.jpg"
