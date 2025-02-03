@@ -12,6 +12,23 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+# Sidebar with grouped pages
+st.sidebar.title("Navigation")
+
+# Group 1: General Information
+with st.sidebar.expander("📋 Products"):
+    if st.button("Getting Started"):
+        st.switch_page("pages/onboarding.py")
+    if st.button("Start a Brain Break"):
+        st.query_params("pages/brainbreak.py")
+    
+
+with st.sidebar.expander("🔒 User Tools"):
+    if st.button("Logout"):
+        st.switch_page("home.py")
+    if st.button("FAQ"):
+        st.switch_page("pages/faq.py")
+
 # Header
 st.title("Neurene - Your Brain Break Analytics")
 st.subheader("Track your mindful breaks and mood changes over time.")

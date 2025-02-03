@@ -14,13 +14,31 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed",
     menu_items={
-         'Get Help': "http://localhost:8501/faq",
-         'Report a bug': "mailto:support@neurene.com",
          'About': "© 2024 Neurene Productivity Group GmbH. All rights reserved."
      }
 )
 
+
+# Sidebar with grouped pages
+st.sidebar.title("Navigation")
+
+# Group 1: General Information
+with st.sidebar.expander("📋 Products"):
+    if st.button("Start a Brain Break"):
+        st.query_params("pages/brainbreak.py")
+    if st.button("Analytics"):
+        st.query_params("pages/analytics.py")
+    
+
+with st.sidebar.expander("🔒 User Tools"):
+    if st.button("Logout"):
+        st.switch_page("home.py")
+    if st.button("FAQ"):
+        st.switch_page("pages/faq.py")
+
+
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly", "https://www.googleapis.com/auth/calendar.events"]
+
 
 def main():
     st.markdown(
@@ -30,17 +48,28 @@ def main():
         unsafe_allow_html=True,
     )    
 
-    st.write(f"Your ideal BrainBreak would last {st.session_state.break_duration}. And would be scheduled after {st.session_state.productivity_time}.")
+    st.write(f"Your ideal BrainBreak would last {st.session_state.break_duration}. "
+             f"And it would be scheduled after {st.session_state.productivity_time}.")
+    
     st.write("Your upcoming meetings are shown below:")
 
-    maxresults = 4
-    events = get_calendar_events(maxresults)
-    html_output = render_events_to_html(events)
-    st.markdown(html_output, unsafe_allow_html=True)
-    
-    st.write(f"Considering you preferences and your meetings for tomorrow, your ideal BrainBreaks would be scheduled at 2.30 pm and would last {st.session_state.break_duration}.")
+    max_results = 4
+    events = get_calendar_events(max_results)  # Ensure this function is defined
+    html_output = render_events_to_html(events)  # Ensure this function is defined
 
-    if st.button("Add BrainBreak to your calendar"):
+    st.markdown(html_output, unsafe_allow_html=True)
+
+    # Check if "Brain Break" is in the event list
+    if "BrainBreak" in events:
+        brain_break_time = extract_brain_break_time(events)  # Function to extract the event time
+        st.write(f"Your next Brain Break is already scheduled for {brain_break_time}.")
+    else:
+        st.write(f"Considering your preferences and your meetings for tomorrow, "
+                 f"ideally a BrainBreak would be scheduled at 2:30 PM and "
+                 f"would last {st.session_state.break_duration}.")
+
+
+    if st.button("Add another BrainBreak to your calendar"):
         now = datetime.datetime.utcnow()
         start_time = datetime.datetime(year=now.year, month=now.month, day=now.day) + datetime.timedelta(days=1, hours= 13, minutes=30)
         print("Start Time:", start_time)
@@ -65,6 +94,17 @@ def main():
         """,
         unsafe_allow_html=True,
     )
+
+
+# Function to extract Brain Break event time
+def extract_brain_break_time(events):
+    for event in events:
+        if isinstance(event, dict) and "summary" in event and "BrainBreak" in event["summary"]:
+            if "start" in event:
+                return event["start"]  # Directly return the start time
+    return "Unknown Time"
+
+
 
 def get_calendar_events(maxresults):
     creds = None

@@ -8,6 +8,23 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+# Sidebar with grouped pages
+st.sidebar.title("Navigation")
+
+# Group 1: General Information
+with st.sidebar.expander("📋 Products"):
+    if st.button("Getting Started"):
+        st.switch_page("pages/onboarding.py")
+    if st.button("Analytics"):
+        st.query_params("pages/analytics.py")
+    
+
+with st.sidebar.expander("🔒 User Tools"):
+    if st.button("Logout"):
+        st.switch_page("home.py")
+    if st.button("FAQ"):
+        st.switch_page("pages/faq.py")
+
 # Initialize session state
 if "break_active" not in st.session_state:
     st.session_state.break_active = False
@@ -78,7 +95,7 @@ logo_path = "./static/neurene_logo_light.jpg"
 # Title and Introduction
 st.image(logo_path, width=80)
 st.title(f"Welcome, {st.session_state.username}!")
-st.subheader("We are so glad that you decided to take some time for yourself today.")
+st.subheader("It's wonderful that you're taking time for yourself today.")
 
 # Step 1: Ask for Current Mood
 st.session_state.current_mood = st.selectbox(
