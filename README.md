@@ -52,7 +52,8 @@ streamlit run main.py
 ```
 
 # Further planned developments
+- Implement a Functional Login System
 
-connect gmail API
+- Integrate Notification Blocking Features
 
-explore and discuss what can be done with AI, whoop api, headspace api, insights api
+- Host the Application on AWS
